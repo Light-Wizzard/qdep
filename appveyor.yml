@@ -9,13 +9,13 @@ environment:
   TARGET_NAME: qdep
 
   matrix:
-    - PLATFORM: msvc2017_64
+    - PLATFORM: msvc2019_64
     - PLATFORM: mingw73_64
-    - PLATFORM: winrt_x64_msvc2017
-    - PLATFORM: msvc2017
+    - PLATFORM: winrt_x64_msvc2019
+    - PLATFORM: msvc2019
     - PLATFORM: mingw73_32
-    - PLATFORM: winrt_x86_msvc2017
-    - PLATFORM: winrt_armv7_msvc2017
+    - PLATFORM: winrt_x86_msvc2019
+    - PLATFORM: winrt_armv7_msvc2019
 
 install:
   - git clone https://github.com/Light-Wizzard/QtModules.git .\qtmodules-travis
