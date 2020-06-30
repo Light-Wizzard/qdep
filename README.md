@@ -1,9 +1,12 @@
 # qdep
 A very basic yet simple to use dependency management tool for qmake based projects.
 
-[![Travis Build Status](https://travis-ci.org/Skycoder42/qdep.svg?branch=master)](https://travis-ci.org/Skycoder42/qdep)
-[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/s222vatjpd4ic70w/branch/master?svg=true)](https://ci.appveyor.com/project/Skycoder42/qdep/branch/master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/373a21f05f8847c29ce08739891631e8)](https://www.codacy.com/app/Skycoder42/qdep)
+## Forked
+This pages is changed to show the Forked Status.
+
+[![Travis Build Status](https://travis-ci.org/Light-Wizzard/qdep.svg?branch=master)](https://travis-ci.org/Light-Wizzard/qdep)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/s222vatjpd4ic70w/branch/master?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/qdep/branch/master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/373a21f05f8847c29ce08739891631e8)](https://www.codacy.com/app/Light-Wizzard/qdep)
 [![AUR](https://img.shields.io/aur/version/qdep.svg)](https://aur.archlinux.org/packages/qdep/)
 [![PyPi](https://img.shields.io/pypi/v/qdep.svg)](https://pypi.org/project/qdep/)
 
@@ -115,14 +118,14 @@ eval "$(register-python-argcomplete qdep)"
 When using BASH, you can alternatively use global completition - see [Activating global completion](https://argcomplete.readthedocs.io/en/latest/#activating-global-completion) for more details on that. Other shells might work as well, depending on how well argcomplete works with them. Refer to the argcomplete documentation and their GitHub Repository .
 
 ## Getting started
-The basic usage of qdep is very simple. For this example, we assume you want to add for example [QHotkey](https://github.com/Skycoder42/QHotkey) to a project via qdep. All you have to do is to install (and prepare) qdep and then add the following two lines to your pro-file:
+The basic usage of qdep is very simple. For this example, we assume you want to add for example [QHotkey](https://github.com/Light-Wizzard/QHotkey) to a project via qdep. All you have to do is to install (and prepare) qdep and then add the following two lines to your pro-file:
 
 ```qmake
-QDEP_DEPENDS += Skycoder42/QHotkey
+QDEP_DEPENDS += Light-Wizzard/QHotkey
 !load(qdep):error("Failed to load qdep feature")
 ```
 
-Thats it! The next time you run qmake qdep will automatically download the latest release and add them to your project. Just compile the project and you can use the library. A more explicit way to specify the package (and what that shorter string extends to) would be `https://github.com/Skycoder42/QHotkey.git@1.2.2/qhotkey.pri`
+Thats it! The next time you run qmake qdep will automatically download the latest release and add them to your project. Just compile the project and you can use the library. A more explicit way to specify the package (and what that shorter string extends to) would be `https://github.com/Light-Wizzard/QHotkey.git@1.2.2/qhotkey.pri`
 
 ## Getting deeper
 Besides this basic functionality of referencing qdep packages, qdep offers a few additional things to make using (and developing) those easier. In the following sections, they will be explained in detail.
@@ -160,8 +163,8 @@ CONFIG += static  # dynamic libraries are also possible, but dependencies must s
 
 # ...
 
-QDEP_DEPENDS += Skycoder42/QHotkey
-QDEP_EXPORTS += Skycoder42/QHotkey
+QDEP_DEPENDS += Light-Wizzard/QHotkey
+QDEP_EXPORTS += Light-Wizzard/QHotkey
 CONFIG += qdep_link_export
 !load(qdep):error("Failed to load qdep feature")
 ```
@@ -267,7 +270,7 @@ root (subdirs)
   |    |--lib (lib)
   |--app (app)
 ```
-Both lib and app are assumed to depend on a theoretical qdep project dependency name `Skycoder42/SuperLib`, but app also depends on lib.
+Both lib and app are assumed to depend on a theoretical qdep project dependency name `Light-Wizzard/SuperLib`, but app also depends on lib.
 
 The first step would be to choose a subdirs project to add the dependency to. For this example, the libs project is choosen. Add the following lines to add the dependency:
 ```qmake
@@ -276,8 +279,8 @@ SUBDIRS += lib
 
 # ....
 
-QDEP_PROJECT_SUBDIRS += Skycoder42/SuperLib
-lib.qdep_depends += Skycoder42/SuperLib
+QDEP_PROJECT_SUBDIRS += Light-Wizzard/SuperLib
+lib.qdep_depends += Light-Wizzard/SuperLib
 !load(qdep):error("Failed to load qdep feature")
 ```
 The `QDEP_PROJECT_SUBDIRS` is used to actually pull in the project dependency, while adding it to `lib.qdep_depends` *only* makes sure that the qdep dependency is built before lib. This is not needed if lib does not depend on the qdep dependency. It is however recommended to always have a seperate subdirs project for qdep dependencies, i.e. for this concrete example it would be better to move the lib project one stage up or create another subdir project within libs that references the qdep dependencies.
@@ -285,7 +288,7 @@ The `QDEP_PROJECT_SUBDIRS` is used to actually pull in the project dependency, w
 Next, we need to reference the library itself in app/lib. The procedure is the same for both, so here it is only shown for the app project as an example. In the app pro file, add the lines:
 ```qmake
 QDEP_PROJECT_ROOT = libs  # Or "./libs" - would be ".." for the lib project
-QDEP_PROJECT_LINK_DEPENDS += Skycoder42/SuperLib
+QDEP_PROJECT_LINK_DEPENDS += Light-Wizzard/SuperLib
 !load(qdep):error("Failed to load qdep feature")
 ```
 `QDEP_PROJECT_ROOT` tells qdep where the project is located, that contains the reference to the actual qdep project dependency, and `QDEP_PROJECT_LINK_DEPENDS` list all the dependencies this project (app) depends on. If any dependency listed there was not specified in the libs project via `QDEP_PROJECT_SUBDIRS`, the build will fail.
@@ -295,9 +298,9 @@ And with that, the project dependency has been sucessfully added and referenced.
 #### Creating project dependencies
 Generally speaking, project dependencies are just normal qmake projects. However, such a project should **always** include the qdep feature and add `qdep_link_export` to the config, as without the generated export pri file, it will not be usable as qdep project dependency. But besides that, you can do anything you want, i.e. add other normal qdep pri dependencies etc. and even export them if needed.
 
-However, there is one additional feature that is only possible with qdep project dependencies: You can directly reference other qdep project dependencies. Doing so will make sure that whichever subdirs project that includes this project will also include the dependencies as subdirs and ensure the qmake build order, as well as referencing the corresponding export pri files. To for example reference `Skycoder42/SuperLib` from within a qdep project dependency, add the following:
+However, there is one additional feature that is only possible with qdep project dependencies: You can directly reference other qdep project dependencies. Doing so will make sure that whichever subdirs project that includes this project will also include the dependencies as subdirs and ensure the qmake build order, as well as referencing the corresponding export pri files. To for example reference `Light-Wizzard/SuperLib` from within a qdep project dependency, add the following:
 ```qmake
-QDEP_PROJECT_DEPENDS += Skycoder42/SuperLib
+QDEP_PROJECT_DEPENDS += Light-Wizzard/SuperLib
 !load(qdep):error("Failed to load qdep feature")
 ```
 
