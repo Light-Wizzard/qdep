@@ -14,8 +14,7 @@ env:
     - DOCKER_IMAGE=base
     - MAKE_RUN_TESTS=true
     - TARGET_NAME=qdep
-    - api_key: "${GITHUB_TOKEN}"
-    
+  
 matrix:
   include:
     - os: linux
@@ -40,6 +39,13 @@ matrix:
       env:
         - PLATFORM=ios
 
+deploy:
+  provider: releases
+  api_key: "${GITHUB_TOKEN}"
+  on:
+    tags: true
+    rvm: continuous
+    
 before_install:
   - git clone https://github.com/Light-Wizzard/QtModules.git ./qtmodules-travis
   - travis_wait 40 ./qtmodules-travis/ci/$TRAVIS_OS_NAME/setup.sh
