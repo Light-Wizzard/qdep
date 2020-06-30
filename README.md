@@ -2,7 +2,21 @@
 A very basic yet simple to use dependency management tool for qmake based projects.
 
 ## Forked
-This pages is changed to show the Forked Status.
+This pages is changed to show the Forked Status, as such, I changed Skycoder42 to Light-Wizzard so I can use my own Travis and AppVeyor account to build it.
+
+I have seen a lot of GitHub Repositories, and Skycoder42 is the best, the best documented, the best coding style and features, there is a lot to learn from this repository.
+
+Why I forked this is simple, I cannot get it to work on my Linux or Windows Machine, so my goal here, is just to get this to build on Travis and AppVeyor, and that means I need to make changes to this page, as well as the build scripts that are failing me due to user name and passwords, so I also needed to Fork [QtModules](https://github.com/Light-Wizzard/QtModules), in order to make some changes so it will work with my accounts.
+
+I have two issues currently, python version is one, this is offically only supporting 3.7, this should not be an issue, but here is the deal, Windows 10 Pro, I installed all the Development tools I can via Microsoft Store, and I did install Python 3.7x, yet in Powershell, and Qt MinGW Shell, Python -v shows 3.8, I am using the online Installer for Qt, and in Linux I came to a huge understanding about that version of Qt, it caused so many issues, that I uninstalled, and started using the Arch Linux pacman version of Qt, and half of the issues I filed against several GitHub Repostories, went away, as if by magic, I reinstalled it just to confirm this, and it looks like Windows has the same issue, I am going to install 5.14.1 to confirm this, after a fresh online install.
+
+The issue with the online version steams from its local installation, that does not integrate well with system packages, and also I end up with some permission issues, that you only catch if you read log files in systemd, now in Windows, it seams the Qt Shell has its own versoin of Python, and its not compatible with this version of Python this script is written for.
+
+Now in Windows, the Shell is a Windows thing, so it is not a Qt Issue, Windows is what it is, no reason to say more, Windows 10 has Integrated Shells, cmd, Powershell, and Qt Shells, all have their own Python version, and installing others, does not change that, try it, you will see, its maddening, but that is Windows, so what is the hack?
+
+That is what I am working on here.
+
+## Status
 
 [![Travis Build Status](https://travis-ci.org/Light-Wizzard/qdep.svg?branch=master)](https://travis-ci.org/Light-Wizzard/qdep)
 [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/s222vatjpd4ic70w/branch/master?svg=true)](https://ci.appveyor.com/project/Light-Wizzard/qdep/branch/master)
