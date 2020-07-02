@@ -14,7 +14,7 @@ The issue with the online version steams from its local installation, that does 
 
 Now in Windows, the Shell is a Windows thing, so it is not a Qt Issue, Windows is what it is, no reason to say more, Windows 10 has Integrated Shells, cmd, Powershell, and Qt Shells, all have their own Python version, and installing others, does not change that, try it, you will see, its maddening, but that is Windows, so what is the hack?
 
-That is what I am working on here.
+I believe most of my issues above were from Qt Online Installer, I used the Offline installer, and it worked fine, and that goes for both Linux and Windows.
 
 ## Status
 
